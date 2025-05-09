@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="dirsearch:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/dirsearch_jar</output-path>
+    <root id="archive" name="dirsearch.jar">
+      <element id="module-output" name="dirsearch" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/net/portswigger/burp/extensions/montoya-api/2025.3/montoya-api-2025.3.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

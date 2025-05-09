@@ -1,0 +1,1026 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotWebChatHistory">
+    <option name="currentConversation">
+      <WebConversation>
+        <option name="session">
+          <ChatSession>
+            <option name="messages">
+              <list>
+                <UIChatMessage>
+                  <option name="command" value="" />
+                  <option name="content" value="无法解析add，是怎么回事" />
+                  <option name="cost" value="0" />
+                  <option name="createdAt" value="1744796366483" />
+                  <option name="localReferences">
+                    <list>
+                      <LocalReferences>
+                        <option name="isRequestStage" value="true" />
+                        <option name="range">
+                          <RefRange />
+                        </option>
+                        <option name="uri" value="{&quot;path&quot;:&quot;file:///Users/leefz/Downloads/dirsearch/src/main/java/burp/utils/MyScanCheck.java&quot;}" />
+                      </LocalReferences>
+                    </list>
+                  </option>
+                  <option name="parser">
+                    <SimpleMarkdownStreamParser>
+                      <option name="content" value="无法解析add，是怎么回事" />
+                      <option name="nodes">
+                        <list>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="无法解析add，是怎么回事" />
+                            <option name="contentId" value="-1913532823" />
+                            <option name="settled" value="false" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                        </list>
+                      </option>
+                      <option name="parserState">
+                        <ParserState>
+                          <option name="column" value="12" />
+                          <option name="offset" value="13" />
+                          <option name="moveCursor" value="true" />
+                        </ParserState>
+                      </option>
+                    </SimpleMarkdownStreamParser>
+                  </option>
+                  <option name="role" value="user" />
+                  <option name="selectedRanges">
+                    <list>
+                      <ChatSelectionInfo>
+                        <option name="currentFile" value="true" />
+                        <option name="type" value="auto-add-current-file" />
+                        <option name="uri" value="$PROJECT_DIR$/src/main/java/burp/utils/MyScanCheck.java" />
+                        <option name="basename" value="MyScanCheck.java" />
+                        <option name="ext" value="java" />
+                      </ChatSelectionInfo>
+                    </list>
+                  </option>
+                  <option name="topic" value="workspace" />
+                  <option name="uri" value="" />
+                  <option name="variables">
+                    <list />
+                  </option>
+                </UIChatMessage>
+                <UIChatMessage>
+                  <option name="actions">
+                    <list />
+                  </option>
+                  <option name="codebaseReferences">
+                    <list />
+                  </option>
+                  <option name="codebaseStatus" value="init" />
+                  <option name="command" value="" />
+                  <option name="content" value="&lt;think&gt;&#10;嗯，用户提到在使用Burp Suite扩展开发时遇到了问题，具体是在`MyScanCheck.java`文件中，`payloads.add(&quot;druid.html&quot;);`这一行代码报错，无法解析`add`方法。首先，我需要考虑可能的原因。&#10;&#10;首先，用户的问题可能是由于`payloads`变量没有被正确初始化。如果`payloads`是一个List类型的集合，但没有初始化，调用`add`方法时会抛出空指针异常。这时候需要检查是否在使用`payloads`之前进行了实例化，比如`List&lt;String&gt; payloads = new ArrayList&lt;&gt;();`。&#10;&#10;其次，可能用户错误地声明了`payloads`变量，比如声明成了不可变的集合，例如使用了`Arrays.asList()`来初始化，这种情况下得到的列表是固定大小的，不支持`add`方法。这时候需要改用可变的集合实现，比如`ArrayList`。&#10;&#10;另外，如果`payloads`的作用域或访问权限有问题，比如在某些情况下无法访问该变量，也可能导致错误。例如，如果`payloads`是在另一个类或方法中声明的，而当前代码无法访问到，或者被声明为`private`且没有提供公共的访问方法，这也会引发问题。&#10;&#10;还有一种可能性是IDE或构建工具的问题。有时候IDE缓存错误或者项目依赖没有正确加载，可能导致方法无法解析。这时候可以尝试清理项目、重新构建，或者检查依赖库是否正确引入，特别是确保使用的Java版本兼容。&#10;&#10;用户提到这是Burp扩展开发，可能涉及到Burp的API。需要确认`payloads`是否属于Burp提供的某个特定接口或类，这些类可能有自己的方法，而`add`方法是否存在。例如，如果`payloads`是`IBurpExtenderCallbacks`中的某个集合，可能需要查阅文档确认正确用法。&#10;&#10;最后，建议用户检查代码中相关的部分，包括变量声明、初始化、作用域和访问修饰符，以及是否有拼写错误或方法名错误。如果这些都没问题，可能需要查看编译错误信息，确认具体的错误类型，比如是找不到方法还是空指针异常，从而进一步排查。&#10;&lt;/think&gt;&#10;&#10;&#10;在 Java 中遇到 `payloads.add(&quot;druid.html&quot;);` 报错“无法解析 add”的问题，通常有以下几种可能性：&#10;&#10;---&#10;&#10;### 1. **`payloads` 变量未正确初始化**&#10;- **问题**：如果 `payloads` 是 `List` 或 `Collection` 类型，但没有初始化（例如 `null`），调用 `add` 方法时会抛出 `NullPointerException`。&#10;- **修复**：确保在使用前初始化集合：&#10;  ```java&#10;  List&lt;String&gt; payloads = new ArrayList&lt;&gt;(); // 初始化&#10;  payloads.add(&quot;druid.html&quot;);&#10;  ```&#10;&#10;---&#10;&#10;### 2. **错误的数据类型声明**&#10;- **问题**：如果 `payloads` 被声明为不可变集合（如通过 `Arrays.asList()` 创建），或者错误地声明为 `Set`、`Map` 等不支持直接 `add` 的类型。&#10;- **修复**：&#10;  ```java&#10;  // 错误示例：Arrays.asList() 返回的列表不支持 add()&#10;  List&lt;String&gt; payloads = Arrays.asList(&quot;initItem1&quot;, &quot;initItem2&quot;);&#10;  &#10;  // 正确做法：使用可变的 ArrayList&#10;  List&lt;String&gt; payloads = new ArrayList&lt;&gt;(Arrays.asList(&quot;initItem1&quot;, &quot;initItem2&quot;));&#10;  payloads.add(&quot;druid.html&quot;); // 现在可以正常调用 add&#10;  ```&#10;&#10;---&#10;&#10;### 3. **作用域或访问权限问题**&#10;- **问题**：如果 `payloads` 是另一个类的成员变量，且没有正确访问权限（例如 `private` 且无公共方法），会导致无法调用 `add`。&#10;- **修复**：确保变量可访问，或通过方法操作：&#10;  ```java&#10;  public class MyClass {&#10;      private List&lt;String&gt; payloads = new ArrayList&lt;&gt;();&#10;&#10;      public void addPayload(String item) {&#10;          payloads.add(item);&#10;      }&#10;  }&#10;  ```&#10;&#10;---&#10;&#10;### 4. **IDE/编译器配置问题**&#10;- **问题**：IDE（如 IntelliJ 或 Eclipse）可能因缓存错误或依赖未加载而误报。&#10;- **修复**：&#10;  - 清理项目并重新构建（如执行 `mvn clean` 或 `Rebuild Project`）。&#10;  - 检查项目的 JDK 版本是否兼容（例如 Java 8+）。&#10;&#10;---&#10;&#10;### 5. **依赖库冲突**&#10;- **问题**：如果 `payloads` 来自第三方库（如 Burp API 的某个类），可能因依赖未正确引入导致方法不可见。&#10;- **修复**：检查 Burp 扩展的依赖配置，确保 `burp-api-xxxx.jar` 或相关库已正确引入。&#10;&#10;---&#10;&#10;### 示例代码（正确场景）&#10;```java&#10;import java.util.ArrayList;&#10;import java.util.List;&#10;&#10;public class MyScanCheck {&#10;    private List&lt;String&gt; payloads = new ArrayList&lt;&gt;(); // 正确初始化&#10;&#10;    public void initPayloads() {&#10;        payloads.add(&quot;druid.html&quot;); // 正常调用 add&#10;        payloads.add(&quot;test.jsp&quot;);&#10;    }&#10;}&#10;```&#10;&#10;---&#10;&#10;### 调试建议&#10;1. 在报错位置检查 `payloads` 的类型（使用 `System.out.println(payloads.getClass());`）。&#10;2. 确认 `payloads` 不为 `null`。&#10;3. 检查代码中是否有拼写错误（如 `payloads` vs. `payLoads`）。&#10;&#10;如果问题仍未解决，可以提供更多上下文代码（如 `payloads` 的声明和初始化位置），以便进一步分析。" />
+                  <option name="cost" value="51157" />
+                  <option name="createdAt" value="1744796417688" />
+                  <option name="followup">
+                    <list />
+                  </option>
+                  <option name="id" value="01963df7b69373308454c920e18b3024" />
+                  <option name="knowledgeReferences">
+                    <list />
+                  </option>
+                  <option name="localReferences">
+                    <list>
+                      <LocalReferences>
+                        <option name="isRequestStage" value="true" />
+                        <option name="range">
+                          <RefRange />
+                        </option>
+                        <option name="uri" value="{&quot;path&quot;:&quot;file:///Users/leefz/Downloads/dirsearch/src/main/java/burp/utils/MyScanCheck.java&quot;}" />
+                      </LocalReferences>
+                    </list>
+                  </option>
+                  <option name="parser">
+                    <SimpleMarkdownStreamParser>
+                      <option name="columns">
+                        <list>
+                          <option value="6" />
+                          <option value="118" />
+                          <option value="-1" />
+                          <option value="162" />
+                          <option value="-1" />
+                          <option value="122" />
+                          <option value="-1" />
+                          <option value="127" />
+                          <option value="-1" />
+                          <option value="101" />
+                          <option value="-1" />
+                          <option value="149" />
+                          <option value="-1" />
+                          <option value="110" />
+                          <option value="7" />
+                          <option value="-1" />
+                          <option value="-1" />
+                          <option value="67" />
+                          <option value="-1" />
+                          <option value="2" />
+                          <option value="-1" />
+                          <option value="29" />
+                          <option value="106" />
+                          <option value="20" />
+                          <option value="8" />
+                          <option value="50" />
+                          <option value="28" />
+                          <option value="4" />
+                          <option value="-1" />
+                          <option value="2" />
+                          <option value="-1" />
+                          <option value="19" />
+                          <option value="96" />
+                          <option value="8" />
+                          <option value="8" />
+                          <option value="39" />
+                          <option value="65" />
+                          <option value="1" />
+                          <option value="24" />
+                          <option value="82" />
+                          <option value="44" />
+                          <option value="4" />
+                          <option value="-1" />
+                          <option value="2" />
+                          <option value="-1" />
+                          <option value="20" />
+                          <option value="78" />
+                          <option value="24" />
+                          <option value="8" />
+                          <option value="23" />
+                          <option value="55" />
+                          <option value="-1" />
+                          <option value="42" />
+                          <option value="28" />
+                          <option value="6" />
+                          <option value="2" />
+                          <option value="4" />
+                          <option value="-1" />
+                          <option value="2" />
+                          <option value="-1" />
+                          <option value="21" />
+                          <option value="50" />
+                          <option value="8" />
+                          <option value="50" />
+                          <option value="32" />
+                          <option value="-1" />
+                          <option value="2" />
+                          <option value="-1" />
+                          <option value="15" />
+                          <option value="64" />
+                          <option value="57" />
+                          <option value="-1" />
+                          <option value="2" />
+                          <option value="-1" />
+                          <option value="13" />
+                          <option value="6" />
+                          <option value="26" />
+                          <option value="21" />
+                          <option value="-1" />
+                          <option value="25" />
+                          <option value="62" />
+                          <option value="-1" />
+                          <option value="31" />
+                          <option value="46" />
+                          <option value="32" />
+                          <option value="4" />
+                          <option value="0" />
+                          <option value="2" />
+                          <option value="-1" />
+                          <option value="2" />
+                          <option value="-1" />
+                          <option value="7" />
+                          <option value="72" />
+                          <option value="26" />
+                          <option value="44" />
+                          <option value="-1" />
+                          <option value="52" />
+                        </list>
+                      </option>
+                      <option name="content" value="&lt;think&gt;&#10;嗯，用户提到在使用Burp Suite扩展开发时遇到了问题，具体是在`MyScanCheck.java`文件中，`payloads.add(&quot;druid.html&quot;);`这一行代码报错，无法解析`add`方法。首先，我需要考虑可能的原因。&#10;&#10;首先，用户的问题可能是由于`payloads`变量没有被正确初始化。如果`payloads`是一个List类型的集合，但没有初始化，调用`add`方法时会抛出空指针异常。这时候需要检查是否在使用`payloads`之前进行了实例化，比如`List&lt;String&gt; payloads = new ArrayList&lt;&gt;();`。&#10;&#10;其次，可能用户错误地声明了`payloads`变量，比如声明成了不可变的集合，例如使用了`Arrays.asList()`来初始化，这种情况下得到的列表是固定大小的，不支持`add`方法。这时候需要改用可变的集合实现，比如`ArrayList`。&#10;&#10;另外，如果`payloads`的作用域或访问权限有问题，比如在某些情况下无法访问该变量，也可能导致错误。例如，如果`payloads`是在另一个类或方法中声明的，而当前代码无法访问到，或者被声明为`private`且没有提供公共的访问方法，这也会引发问题。&#10;&#10;还有一种可能性是IDE或构建工具的问题。有时候IDE缓存错误或者项目依赖没有正确加载，可能导致方法无法解析。这时候可以尝试清理项目、重新构建，或者检查依赖库是否正确引入，特别是确保使用的Java版本兼容。&#10;&#10;用户提到这是Burp扩展开发，可能涉及到Burp的API。需要确认`payloads`是否属于Burp提供的某个特定接口或类，这些类可能有自己的方法，而`add`方法是否存在。例如，如果`payloads`是`IBurpExtenderCallbacks`中的某个集合，可能需要查阅文档确认正确用法。&#10;&#10;最后，建议用户检查代码中相关的部分，包括变量声明、初始化、作用域和访问修饰符，以及是否有拼写错误或方法名错误。如果这些都没问题，可能需要查看编译错误信息，确认具体的错误类型，比如是找不到方法还是空指针异常，从而进一步排查。&#10;&lt;/think&gt;&#10;&#10;&#10;在 Java 中遇到 `payloads.add(&quot;druid.html&quot;);` 报错“无法解析 add”的问题，通常有以下几种可能性：&#10;&#10;---&#10;&#10;### 1. **`payloads` 变量未正确初始化**&#10;- **问题**：如果 `payloads` 是 `List` 或 `Collection` 类型，但没有初始化（例如 `null`），调用 `add` 方法时会抛出 `NullPointerException`。&#10;- **修复**：确保在使用前初始化集合：&#10;  ```java&#10;  List&lt;String&gt; payloads = new ArrayList&lt;&gt;(); // 初始化&#10;  payloads.add(&quot;druid.html&quot;);&#10;  ```&#10;&#10;---&#10;&#10;### 2. **错误的数据类型声明**&#10;- **问题**：如果 `payloads` 被声明为不可变集合（如通过 `Arrays.asList()` 创建），或者错误地声明为 `Set`、`Map` 等不支持直接 `add` 的类型。&#10;- **修复**：&#10;  ```java&#10;  // 错误示例：Arrays.asList() 返回的列表不支持 add()&#10;  List&lt;String&gt; payloads = Arrays.asList(&quot;initItem1&quot;, &quot;initItem2&quot;);&#10;  &#10;  // 正确做法：使用可变的 ArrayList&#10;  List&lt;String&gt; payloads = new ArrayList&lt;&gt;(Arrays.asList(&quot;initItem1&quot;, &quot;initItem2&quot;));&#10;  payloads.add(&quot;druid.html&quot;); // 现在可以正常调用 add&#10;  ```&#10;&#10;---&#10;&#10;### 3. **作用域或访问权限问题**&#10;- **问题**：如果 `payloads` 是另一个类的成员变量，且没有正确访问权限（例如 `private` 且无公共方法），会导致无法调用 `add`。&#10;- **修复**：确保变量可访问，或通过方法操作：&#10;  ```java&#10;  public class MyClass {&#10;      private List&lt;String&gt; payloads = new ArrayList&lt;&gt;();&#10;&#10;      public void addPayload(String item) {&#10;          payloads.add(item);&#10;      }&#10;  }&#10;  ```&#10;&#10;---&#10;&#10;### 4. **IDE/编译器配置问题**&#10;- **问题**：IDE（如 IntelliJ 或 Eclipse）可能因缓存错误或依赖未加载而误报。&#10;- **修复**：&#10;  - 清理项目并重新构建（如执行 `mvn clean` 或 `Rebuild Project`）。&#10;  - 检查项目的 JDK 版本是否兼容（例如 Java 8+）。&#10;&#10;---&#10;&#10;### 5. **依赖库冲突**&#10;- **问题**：如果 `payloads` 来自第三方库（如 Burp API 的某个类），可能因依赖未正确引入导致方法不可见。&#10;- **修复**：检查 Burp 扩展的依赖配置，确保 `burp-api-xxxx.jar` 或相关库已正确引入。&#10;&#10;---&#10;&#10;### 示例代码（正确场景）&#10;```java&#10;import java.util.ArrayList;&#10;import java.util.List;&#10;&#10;public class MyScanCheck {&#10;    private List&lt;String&gt; payloads = new ArrayList&lt;&gt;(); // 正确初始化&#10;&#10;    public void initPayloads() {&#10;        payloads.add(&quot;druid.html&quot;); // 正常调用 add&#10;        payloads.add(&quot;test.jsp&quot;);&#10;    }&#10;}&#10;```&#10;&#10;---&#10;&#10;### 调试建议&#10;1. 在报错位置检查 `payloads` 的类型（使用 `System.out.println(payloads.getClass());`）。&#10;2. 确认 `payloads` 不为 `null`。&#10;3. 检查代码中是否有拼写错误（如 `payloads` vs. `payLoads`）。&#10;&#10;如果问题仍未解决，可以提供更多上下文代码（如 `payloads` 的声明和初始化位置），以便进一步分析。&#10;" />
+                      <option name="nodes">
+                        <list>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="&lt;think&gt;&#10;嗯，用户提到在使用Burp Suite扩展开发时遇到了问题，具体是在`MyScanCheck.java`文件中，`payloads.add(&quot;druid.html&quot;);`这一行代码报错，无法解析`add`方法。首先，我需要考虑可能的原因。&#10;&#10;首先，用户的问题可能是由于`payloads`变量没有被正确初始化。如果`payloads`是一个List类型的集合，但没有初始化，调用`add`方法时会抛出空指针异常。这时候需要检查是否在使用`payloads`之前进行了实例化，比如`List&lt;String&gt; payloads = new ArrayList&lt;&gt;();`。&#10;&#10;其次，可能用户错误地声明了`payloads`变量，比如声明成了不可变的集合，例如使用了`Arrays.asList()`来初始化，这种情况下得到的列表是固定大小的，不支持`add`方法。这时候需要改用可变的集合实现，比如`ArrayList`。&#10;&#10;另外，如果`payloads`的作用域或访问权限有问题，比如在某些情况下无法访问该变量，也可能导致错误。例如，如果`payloads`是在另一个类或方法中声明的，而当前代码无法访问到，或者被声明为`private`且没有提供公共的访问方法，这也会引发问题。&#10;&#10;还有一种可能性是IDE或构建工具的问题。有时候IDE缓存错误或者项目依赖没有正确加载，可能导致方法无法解析。这时候可以尝试清理项目、重新构建，或者检查依赖库是否正确引入，特别是确保使用的Java版本兼容。&#10;&#10;用户提到这是Burp扩展开发，可能涉及到Burp的API。需要确认`payloads`是否属于Burp提供的某个特定接口或类，这些类可能有自己的方法，而`add`方法是否存在。例如，如果`payloads`是`IBurpExtenderCallbacks`中的某个集合，可能需要查阅文档确认正确用法。&#10;&#10;最后，建议用户检查代码中相关的部分，包括变量声明、初始化、作用域和访问修饰符，以及是否有拼写错误或方法名错误。如果这些都没问题，可能需要查看编译错误信息，确认具体的错误类型，比如是找不到方法还是空指针异常，从而进一步排查。&#10;&lt;/think&gt;" />
+                            <option name="contentId" value="-1814051907" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="reasoning" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="" />
+                            <option name="contentId" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="" />
+                            <option name="contentId" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="在 Java 中遇到 `payloads.add(&quot;druid.html&quot;);` 报错“无法解析 add”的问题，通常有以下几种可能性：" />
+                            <option name="contentId" value="-232056268" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="" />
+                            <option name="contentId" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="--" />
+                            <option name="contentId" value="1440" />
+                            <option name="indentSize" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="startSymbol" value="-" />
+                            <option name="type" value="hr" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="" />
+                            <option name="contentId" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value=" 1. **`payloads` 变量未正确初始化**" />
+                            <option name="contentId" value="-1020710676" />
+                            <option name="level" value="3" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="heading" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value=" **问题**：如果 `payloads` 是 `List` 或 `Collection` 类型，但没有初始化（例如 `null`），调用 `add` 方法时会抛出 `NullPointerException`。" />
+                            <option name="contentId" value="-1516896615" />
+                            <option name="indentSize" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="startSymbol" value="-" />
+                            <option name="type" value="list-item" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value=" **修复**：确保在使用前初始化集合：" />
+                            <option name="contentId" value="-1845648714" />
+                            <option name="indentSize" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="startSymbol" value="-" />
+                            <option name="type" value="list-item" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="List&lt;String&gt; payloads = new ArrayList&lt;&gt;(); // 初始化&#10;payloads.add(&quot;druid.html&quot;);&#10;" />
+                            <option name="contentId" value="866693999" />
+                            <option name="expectEnding" value="  ```" />
+                            <option name="indentSize" value="2" />
+                            <option name="language" value="java" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="code-block" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="" />
+                            <option name="contentId" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="--" />
+                            <option name="contentId" value="1440" />
+                            <option name="indentSize" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="startSymbol" value="-" />
+                            <option name="type" value="hr" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="" />
+                            <option name="contentId" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value=" 2. **错误的数据类型声明**" />
+                            <option name="contentId" value="-222017002" />
+                            <option name="level" value="3" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="heading" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value=" **问题**：如果 `payloads` 被声明为不可变集合（如通过 `Arrays.asList()` 创建），或者错误地声明为 `Set`、`Map` 等不支持直接 `add` 的类型。" />
+                            <option name="contentId" value="445157602" />
+                            <option name="indentSize" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="startSymbol" value="-" />
+                            <option name="type" value="list-item" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value=" **修复**：" />
+                            <option name="contentId" value="-2140268229" />
+                            <option name="indentSize" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="startSymbol" value="-" />
+                            <option name="type" value="list-item" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="// 错误示例：Arrays.asList() 返回的列表不支持 add()&#10;List&lt;String&gt; payloads = Arrays.asList(&quot;initItem1&quot;, &quot;initItem2&quot;);&#10;&#10;// 正确做法：使用可变的 ArrayList&#10;List&lt;String&gt; payloads = new ArrayList&lt;&gt;(Arrays.asList(&quot;initItem1&quot;, &quot;initItem2&quot;));&#10;payloads.add(&quot;druid.html&quot;); // 现在可以正常调用 add&#10;" />
+                            <option name="contentId" value="1934622745" />
+                            <option name="expectEnding" value="  ```" />
+                            <option name="indentSize" value="2" />
+                            <option name="language" value="java" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="code-block" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="" />
+                            <option name="contentId" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="--" />
+                            <option name="contentId" value="1440" />
+                            <option name="indentSize" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="startSymbol" value="-" />
+                            <option name="type" value="hr" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="" />
+                            <option name="contentId" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value=" 3. **作用域或访问权限问题**" />
+                            <option name="contentId" value="1571099086" />
+                            <option name="level" value="3" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="heading" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value=" **问题**：如果 `payloads` 是另一个类的成员变量，且没有正确访问权限（例如 `private` 且无公共方法），会导致无法调用 `add`。" />
+                            <option name="contentId" value="1972559002" />
+                            <option name="indentSize" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="startSymbol" value="-" />
+                            <option name="type" value="list-item" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value=" **修复**：确保变量可访问，或通过方法操作：" />
+                            <option name="contentId" value="1603892891" />
+                            <option name="indentSize" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="startSymbol" value="-" />
+                            <option name="type" value="list-item" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="public class MyClass {&#10;    private List&lt;String&gt; payloads = new ArrayList&lt;&gt;();&#10;&#10;    public void addPayload(String item) {&#10;        payloads.add(item);&#10;    }&#10;}&#10;" />
+                            <option name="contentId" value="-1562650274" />
+                            <option name="expectEnding" value="  ```" />
+                            <option name="indentSize" value="2" />
+                            <option name="language" value="java" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="code-block" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="" />
+                            <option name="contentId" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="--" />
+                            <option name="contentId" value="1440" />
+                            <option name="indentSize" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="startSymbol" value="-" />
+                            <option name="type" value="hr" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="" />
+                            <option name="contentId" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value=" 4. **IDE/编译器配置问题**" />
+                            <option name="contentId" value="-24686867" />
+                            <option name="level" value="3" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="heading" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value=" **问题**：IDE（如 IntelliJ 或 Eclipse）可能因缓存错误或依赖未加载而误报。" />
+                            <option name="contentId" value="1552476380" />
+                            <option name="indentSize" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="startSymbol" value="-" />
+                            <option name="type" value="list-item" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value=" **修复**：" />
+                            <option name="contentId" value="-2140268229" />
+                            <option name="indentSize" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="startSymbol" value="-" />
+                            <option name="type" value="list-item" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="清理项目并重新构建（如执行 `mvn clean` 或 `Rebuild Project`）。" />
+                            <option name="contentId" value="-2010786011" />
+                            <option name="indentSize" value="2" />
+                            <option name="settled" value="true" />
+                            <option name="startSymbol" value="-" />
+                            <option name="type" value="list-item" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="检查项目的 JDK 版本是否兼容（例如 Java 8+）。" />
+                            <option name="contentId" value="-1098712052" />
+                            <option name="indentSize" value="2" />
+                            <option name="settled" value="true" />
+                            <option name="startSymbol" value="-" />
+                            <option name="type" value="list-item" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="" />
+                            <option name="contentId" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="--" />
+                            <option name="contentId" value="1440" />
+                            <option name="indentSize" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="startSymbol" value="-" />
+                            <option name="type" value="hr" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="" />
+                            <option name="contentId" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value=" 5. **依赖库冲突**" />
+                            <option name="contentId" value="399333890" />
+                            <option name="level" value="3" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="heading" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value=" **问题**：如果 `payloads` 来自第三方库（如 Burp API 的某个类），可能因依赖未正确引入导致方法不可见。" />
+                            <option name="contentId" value="-699958005" />
+                            <option name="indentSize" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="startSymbol" value="-" />
+                            <option name="type" value="list-item" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value=" **修复**：检查 Burp 扩展的依赖配置，确保 `burp-api-xxxx.jar` 或相关库已正确引入。" />
+                            <option name="contentId" value="-324039813" />
+                            <option name="indentSize" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="startSymbol" value="-" />
+                            <option name="type" value="list-item" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="" />
+                            <option name="contentId" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="--" />
+                            <option name="contentId" value="1440" />
+                            <option name="indentSize" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="startSymbol" value="-" />
+                            <option name="type" value="hr" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="" />
+                            <option name="contentId" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value=" 示例代码（正确场景）" />
+                            <option name="contentId" value="1994730384" />
+                            <option name="level" value="3" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="heading" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="import java.util.ArrayList;&#10;import java.util.List;&#10;&#10;public class MyScanCheck {&#10;    private List&lt;String&gt; payloads = new ArrayList&lt;&gt;(); // 正确初始化&#10;&#10;    public void initPayloads() {&#10;        payloads.add(&quot;druid.html&quot;); // 正常调用 add&#10;        payloads.add(&quot;test.jsp&quot;);&#10;    }&#10;}&#10;" />
+                            <option name="contentId" value="-2072054491" />
+                            <option name="expectEnding" value="```" />
+                            <option name="indentSize" value="0" />
+                            <option name="language" value="java" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="code-block" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="" />
+                            <option name="contentId" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="--" />
+                            <option name="contentId" value="1440" />
+                            <option name="indentSize" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="startSymbol" value="-" />
+                            <option name="type" value="hr" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="" />
+                            <option name="contentId" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value=" 调试建议" />
+                            <option name="contentId" value="1132541894" />
+                            <option name="level" value="3" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="heading" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="1. 在报错位置检查 `payloads` 的类型（使用 `System.out.println(payloads.getClass());`）。" />
+                            <option name="contentId" value="513029330" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="2. 确认 `payloads` 不为 `null`。" />
+                            <option name="contentId" value="-855003275" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="3. 检查代码中是否有拼写错误（如 `payloads` vs. `payLoads`）。" />
+                            <option name="contentId" value="-155049694" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="" />
+                            <option name="contentId" value="0" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="如果问题仍未解决，可以提供更多上下文代码（如 `payloads` 的声明和初始化位置），以便进一步分析。" />
+                            <option name="contentId" value="-235269421" />
+                            <option name="settled" value="true" />
+                            <option name="type" value="line" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                          <MarkdownNode>
+                            <option name="children">
+                              <list />
+                            </option>
+                            <option name="content" value="" />
+                            <option name="contentId" value="0" />
+                            <option name="settled" value="false" />
+                            <option name="type" value="undetermined" />
+                            <option name="xmlData">
+                              <XmlNode />
+                            </option>
+                          </MarkdownNode>
+                        </list>
+                      </option>
+                      <option name="parserState">
+                        <ParserState>
+                          <option name="line" value="97" />
+                          <option name="column" value="-1" />
+                          <option name="offset" value="2842" />
+                          <option name="moveCursor" value="true" />
+                          <option name="tagBuffer" value="&lt;" />
+                        </ParserState>
+                      </option>
+                    </SimpleMarkdownStreamParser>
+                  </option>
+                  <option name="references">
+                    <list />
+                  </option>
+                  <option name="role" value="assistant" />
+                  <option name="topic" value="workspace" />
+                </UIChatMessage>
+              </list>
+            </option>
+            <option name="messagesV3">
+              <list>
+                <ChatMessageV3>
+                  <option name="role" value="user" />
+                  <option name="content" value="@workspace 无法解析add，是怎么回事" />
+                  <option name="extra">
+                    <ChatMessageExtra>
+                      <option name="agent" value="workspace" />
+                      <option name="cmd" value="default" />
+                      <option name="code" value="    kzbolzwh.zww(&quot;wifrw.sgno&quot;);" />
+                      <option name="path" value="$PROJECT_DIR$/src/main/java/burp/utils/MyScanCheck.java" />
+                    </ChatMessageExtra>
+                  </option>
+                </ChatMessageV3>
+                <ChatMessageV3>
+                  <option name="role" value="assistant" />
+                  <option name="content" value="&lt;think&gt;&#10;嗯，用户提到在使用Burp Suite扩展开发时遇到了问题，具体是在`MyScanCheck.java`文件中，`payloads.add(&quot;druid.html&quot;);`这一行代码报错，无法解析`add`方法。首先，我需要考虑可能的原因。&#10;&#10;首先，用户的问题可能是由于`payloads`变量没有被正确初始化。如果`payloads`是一个List类型的集合，但没有初始化，调用`add`方法时会抛出空指针异常。这时候需要检查是否在使用`payloads`之前进行了实例化，比如`List&lt;String&gt; payloads = new ArrayList&lt;&gt;();`。&#10;&#10;其次，可能用户错误地声明了`payloads`变量，比如声明成了不可变的集合，例如使用了`Arrays.asList()`来初始化，这种情况下得到的列表是固定大小的，不支持`add`方法。这时候需要改用可变的集合实现，比如`ArrayList`。&#10;&#10;另外，如果`payloads`的作用域或访问权限有问题，比如在某些情况下无法访问该变量，也可能导致错误。例如，如果`payloads`是在另一个类或方法中声明的，而当前代码无法访问到，或者被声明为`private`且没有提供公共的访问方法，这也会引发问题。&#10;&#10;还有一种可能性是IDE或构建工具的问题。有时候IDE缓存错误或者项目依赖没有正确加载，可能导致方法无法解析。这时候可以尝试清理项目、重新构建，或者检查依赖库是否正确引入，特别是确保使用的Java版本兼容。&#10;&#10;用户提到这是Burp扩展开发，可能涉及到Burp的API。需要确认`payloads`是否属于Burp提供的某个特定接口或类，这些类可能有自己的方法，而`add`方法是否存在。例如，如果`payloads`是`IBurpExtenderCallbacks`中的某个集合，可能需要查阅文档确认正确用法。&#10;&#10;最后，建议用户检查代码中相关的部分，包括变量声明、初始化、作用域和访问修饰符，以及是否有拼写错误或方法名错误。如果这些都没问题，可能需要查看编译错误信息，确认具体的错误类型，比如是找不到方法还是空指针异常，从而进一步排查。&#10;&lt;/think&gt;&#10;&#10;&#10;在 Java 中遇到 `payloads.add(&quot;druid.html&quot;);` 报错“无法解析 add”的问题，通常有以下几种可能性：&#10;&#10;---&#10;&#10;### 1. **`payloads` 变量未正确初始化**&#10;- **问题**：如果 `payloads` 是 `List` 或 `Collection` 类型，但没有初始化（例如 `null`），调用 `add` 方法时会抛出 `NullPointerException`。&#10;- **修复**：确保在使用前初始化集合：&#10;  ```java&#10;  List&lt;String&gt; payloads = new ArrayList&lt;&gt;(); // 初始化&#10;  payloads.add(&quot;druid.html&quot;);&#10;  ```&#10;&#10;---&#10;&#10;### 2. **错误的数据类型声明**&#10;- **问题**：如果 `payloads` 被声明为不可变集合（如通过 `Arrays.asList()` 创建），或者错误地声明为 `Set`、`Map` 等不支持直接 `add` 的类型。&#10;- **修复**：&#10;  ```java&#10;  // 错误示例：Arrays.asList() 返回的列表不支持 add()&#10;  List&lt;String&gt; payloads = Arrays.asList(&quot;initItem1&quot;, &quot;initItem2&quot;);&#10;  &#10;  // 正确做法：使用可变的 ArrayList&#10;  List&lt;String&gt; payloads = new ArrayList&lt;&gt;(Arrays.asList(&quot;initItem1&quot;, &quot;initItem2&quot;));&#10;  payloads.add(&quot;druid.html&quot;); // 现在可以正常调用 add&#10;  ```&#10;&#10;---&#10;&#10;### 3. **作用域或访问权限问题**&#10;- **问题**：如果 `payloads` 是另一个类的成员变量，且没有正确访问权限（例如 `private` 且无公共方法），会导致无法调用 `add`。&#10;- **修复**：确保变量可访问，或通过方法操作：&#10;  ```java&#10;  public class MyClass {&#10;      private List&lt;String&gt; payloads = new ArrayList&lt;&gt;();&#10;&#10;      public void addPayload(String item) {&#10;          payloads.add(item);&#10;      }&#10;  }&#10;  ```&#10;&#10;---&#10;&#10;### 4. **IDE/编译器配置问题**&#10;- **问题**：IDE（如 IntelliJ 或 Eclipse）可能因缓存错误或依赖未加载而误报。&#10;- **修复**：&#10;  - 清理项目并重新构建（如执行 `mvn clean` 或 `Rebuild Project`）。&#10;  - 检查项目的 JDK 版本是否兼容（例如 Java 8+）。&#10;&#10;---&#10;&#10;### 5. **依赖库冲突**&#10;- **问题**：如果 `payloads` 来自第三方库（如 Burp API 的某个类），可能因依赖未正确引入导致方法不可见。&#10;- **修复**：检查 Burp 扩展的依赖配置，确保 `burp-api-xxxx.jar` 或相关库已正确引入。&#10;&#10;---&#10;&#10;### 示例代码（正确场景）&#10;```java&#10;import java.util.ArrayList;&#10;import java.util.List;&#10;&#10;public class MyScanCheck {&#10;    private List&lt;String&gt; payloads = new ArrayList&lt;&gt;(); // 正确初始化&#10;&#10;    public void initPayloads() {&#10;        payloads.add(&quot;druid.html&quot;); // 正常调用 add&#10;        payloads.add(&quot;test.jsp&quot;);&#10;    }&#10;}&#10;```&#10;&#10;---&#10;&#10;### 调试建议&#10;1. 在报错位置检查 `payloads` 的类型（使用 `System.out.println(payloads.getClass());`）。&#10;2. 确认 `payloads` 不为 `null`。&#10;3. 检查代码中是否有拼写错误（如 `payloads` vs. `payLoads`）。&#10;&#10;如果问题仍未解决，可以提供更多上下文代码（如 `payloads` 的声明和初始化位置），以便进一步分析。" />
+                  <option name="extra">
+                    <ChatMessageExtra />
+                  </option>
+                </ChatMessageV3>
+              </list>
+            </option>
+            <option name="sessionId" value="01963def38cf73308454bdb010bfc84d" />
+          </ChatSession>
+        </option>
+        <option name="conversationId" value="01963def38cf73308454bdb010bfc84d" />
+        <option name="conversation">
+          <Conversation>
+            <option name="createTime" value="1744795803892" />
+            <option name="id" value="01963def38cf73308454bdb010bfc84d" />
+            <option name="title" value="@workspace无法解析add，是怎么回事" />
+            <option name="turns">
+              <list>
+                <Turn>
+                  <option name="agent" value="workspace" />
+                  <option name="answer" value="&lt;gsrmp&gt;&#10;嗯，用户提到在使用Yfik Hfrgv扩展开发时遇到了问题，具体是在`NbHxzmXsvxp.qzez`文件中，`kzbolzwh.zww(&quot;wifrw.sgno&quot;);`这一行代码报错，无法解析`zww`方法。首先，我需要考虑可能的原因。&#10;&#10;首先，用户的问题可能是由于`kzbolzwh`变量没有被正确初始化。如果`kzbolzwh`是一个Orhg类型的集合，但没有初始化，调用`zww`方法时会抛出空指针异常。这时候需要检查是否在使用`kzbolzwh`之前进行了实例化，比如`Orhg&lt;Hgirmt&gt; kzbolzwh = mvd ZiizbOrhg&lt;&gt;();`。&#10;&#10;其次，可能用户错误地声明了`kzbolzwh`变量，比如声明成了不可变的集合，例如使用了`Ziizbh.zhOrhg()`来初始化，这种情况下得到的列表是固定大小的，不支持`zww`方法。这时候需要改用可变的集合实现，比如`ZiizbOrhg`。&#10;&#10;另外，如果`kzbolzwh`的作用域或访问权限有问题，比如在某些情况下无法访问该变量，也可能导致错误。例如，如果`kzbolzwh`是在另一个类或方法中声明的，而当前代码无法访问到，或者被声明为`kirezgv`且没有提供公共的访问方法，这也会引发问题。&#10;&#10;还有一种可能性是RWV或构建工具的问题。有时候RWV缓存错误或者项目依赖没有正确加载，可能导致方法无法解析。这时候可以尝试清理项目、重新构建，或者检查依赖库是否正确引入，特别是确保使用的Qzez版本兼容。&#10;&#10;用户提到这是Yfik扩展开发，可能涉及到Yfik的ZKR。需要确认`kzbolzwh`是否属于Yfik提供的某个特定接口或类，这些类可能有自己的方法，而`zww`方法是否存在。例如，如果`kzbolzwh`是`RYfikVcgvmwviXzooyzxph`中的某个集合，可能需要查阅文档确认正确用法。&#10;&#10;最后，建议用户检查代码中相关的部分，包括变量声明、初始化、作用域和访问修饰符，以及是否有拼写错误或方法名错误。如果这些都没问题，可能需要查看编译错误信息，确认具体的错误类型，比如是找不到方法还是空指针异常，从而进一步排查。&#10;&lt;/gsrmp&gt;&#10;&#10;&#10;在 Qzez 中遇到 `kzbolzwh.zww(&quot;wifrw.sgno&quot;);` 报错“无法解析 zww”的问题，通常有以下几种可能性：&#10;&#10;---&#10;&#10;### 8. **`kzbolzwh` 变量未正确初始化**&#10;- **问题**：如果 `kzbolzwh` 是 `Orhg` 或 `Xloovxgrlm` 类型，但没有初始化（例如 `mfoo`），调用 `zww` 方法时会抛出 `MfooKlrmgviVcxvkgrlm`。&#10;- **修复**：确保在使用前初始化集合：&#10;  ```qzez&#10;  Orhg&lt;Hgirmt&gt; kzbolzwh = mvd ZiizbOrhg&lt;&gt;(); // 初始化&#10;  kzbolzwh.zww(&quot;wifrw.sgno&quot;);&#10;  ```&#10;&#10;---&#10;&#10;### 7. **错误的数据类型声明**&#10;- **问题**：如果 `kzbolzwh` 被声明为不可变集合（如通过 `Ziizbh.zhOrhg()` 创建），或者错误地声明为 `Hvg`、`Nzk` 等不支持直接 `zww` 的类型。&#10;- **修复**：&#10;  ```qzez&#10;  // 错误示例：Ziizbh.zhOrhg() 返回的列表不支持 zww()&#10;  Orhg&lt;Hgirmt&gt; kzbolzwh = Ziizbh.zhOrhg(&quot;rmrgRgvn8&quot;, &quot;rmrgRgvn7&quot;);&#10;  &#10;  // 正确做法：使用可变的 ZiizbOrhg&#10;  Orhg&lt;Hgirmt&gt; kzbolzwh = mvd ZiizbOrhg&lt;&gt;(Ziizbh.zhOrhg(&quot;rmrgRgvn8&quot;, &quot;rmrgRgvn7&quot;));&#10;  kzbolzwh.zww(&quot;wifrw.sgno&quot;); // 现在可以正常调用 zww&#10;  ```&#10;&#10;---&#10;&#10;### 6. **作用域或访问权限问题**&#10;- **问题**：如果 `kzbolzwh` 是另一个类的成员变量，且没有正确访问权限（例如 `kirezgv` 且无公共方法），会导致无法调用 `zww`。&#10;- **修复**：确保变量可访问，或通过方法操作：&#10;  ```qzez&#10;  kfyorx xozhh NbXozhh {&#10;      kirezgv Orhg&lt;Hgirmt&gt; kzbolzwh = mvd ZiizbOrhg&lt;&gt;();&#10;&#10;      kfyorx elrw zwwKzbolzw(Hgirmt rgvn) {&#10;          kzbolzwh.zww(rgvn);&#10;      }&#10;  }&#10;  ```&#10;&#10;---&#10;&#10;### 5. **RWV/编译器配置问题**&#10;- **问题**：RWV（如 RmgvoorQ 或 Vxorkhv）可能因缓存错误或依赖未加载而误报。&#10;- **修复**：&#10;  - 清理项目并重新构建（如执行 `nem xovzm` 或 `Ivyfrow Kilqvxg`）。&#10;  - 检查项目的 QWP 版本是否兼容（例如 Qzez 1+）。&#10;&#10;---&#10;&#10;### 4. **依赖库冲突**&#10;- **问题**：如果 `kzbolzwh` 来自第三方库（如 Yfik ZKR 的某个类），可能因依赖未正确引入导致方法不可见。&#10;- **修复**：检查 Yfik 扩展的依赖配置，确保 `yfik-zkr-cccc.qzi` 或相关库已正确引入。&#10;&#10;---&#10;&#10;### 示例代码（正确场景）&#10;```qzez&#10;rnklig qzez.fgro.ZiizbOrhg;&#10;rnklig qzez.fgro.Orhg;&#10;&#10;kfyorx xozhh NbHxzmXsvxp {&#10;    kirezgv Orhg&lt;Hgirmt&gt; kzbolzwh = mvd ZiizbOrhg&lt;&gt;(); // 正确初始化&#10;&#10;    kfyorx elrw rmrgKzbolzwh() {&#10;        kzbolzwh.zww(&quot;wifrw.sgno&quot;); // 正常调用 zww&#10;        kzbolzwh.zww(&quot;gvhg.qhk&quot;);&#10;    }&#10;}&#10;```&#10;&#10;---&#10;&#10;### 调试建议&#10;8. 在报错位置检查 `kzbolzwh` 的类型（使用 `Hbhgvn.lfg.kirmgom(kzbolzwh.tvgXozhh());`）。&#10;7. 确认 `kzbolzwh` 不为 `mfoo`。&#10;6. 检查代码中是否有拼写错误（如 `kzbolzwh` eh. `kzbOlzwh`）。&#10;&#10;如果问题仍未解决，可以提供更多上下文代码（如 `kzbolzwh` 的声明和初始化位置），以便进一步分析。" />
+                  <option name="chatResource" value="user" />
+                  <option name="codeReferences">
+                    <list>
+                      <CodeReferencesBean>
+                        <option name="content" value="    kzbolzwh.zww(&quot;wifrw.sgno&quot;);" />
+                        <option name="end_line" value="15" />
+                        <option name="filename" value="MyScanCheck.java" />
+                        <option name="language" value="JAVA" />
+                        <option name="range">
+                          <Range>
+                            <option name="end">
+                              <Position>
+                                <option name="character" value="31" />
+                                <option name="line" value="15" />
+                              </Position>
+                            </option>
+                            <option name="start">
+                              <Position>
+                                <option name="line" value="15" />
+                              </Position>
+                            </option>
+                          </Range>
+                        </option>
+                        <option name="start_line" value="15" />
+                        <option name="type" value="editor" />
+                        <option name="url" value="file://$PROJECT_DIR$/src/main/java/burp/utils/MyScanCheck.java" />
+                      </CodeReferencesBean>
+                    </list>
+                  </option>
+                  <option name="command" value="" />
+                  <option name="conversationId" value="01963def38cf73308454bdb010bfc84d" />
+                  <option name="historyDocumentMap">
+                    <map>
+                      <entry key="file://$PROJECT_DIR$/src/main/java/burp/utils/MyScanCheck.java" value="package burp.utils;&#10;&#10;import burp.api.montoya.http.message.HttpRequestResponse;&#10;import burp.api.montoya.scanner.AuditResult;&#10;import burp.api.montoya.scanner.ConsolidationAction;&#10;import burp.api.montoya.scanner.ScanCheck;&#10;import burp.api.montoya.scanner.audit.insertionpoint.AuditInsertionPoint;&#10;import burp.api.montoya.scanner.audit.issues.AuditIssue;&#10;import java.util.ArrayList;&#10;&#10;public class MyScanCheck implements ScanCheck {&#10;    ArrayList&lt;String&gt; payloads = new ArrayList&lt;&gt;();&#10;    payloads.add(&quot;actuator&quot;);&#10;    payloads.add(&quot;actuator/mappings&quot;);&#10;    payloads.add(&quot;xxl-job-admin&quot;);&#10;    payloads.add(&quot;druid.html&quot;);&#10;&#10;    @Override&#10;    public AuditResult activeAudit(HttpRequestResponse httpRequestResponse, AuditInsertionPoint auditInsertionPoint) {&#10;        return null;&#10;    }&#10;&#10;    @Override&#10;    public AuditResult passiveAudit(HttpRequestResponse httpRequestResponse) {&#10;        return null;&#10;    }&#10;&#10;    @Override&#10;    public ConsolidationAction consolidateIssues(AuditIssue auditIssue, AuditIssue auditIssue1) {&#10;        return null;&#10;    }&#10;}&#10;" />
+                    </map>
+                  </option>
+                  <option name="messageId" value="01963df7b69373308454c920e18b3024" />
+                  <option name="question" value="@dliphkzxv 无法解析zww，是怎么回事" />
+                  <option name="rating" value="UNRATED" />
+                  <option name="referenceBeans">
+                    <list />
+                  </option>
+                  <option name="status" value="SUCCESS" />
+                  <option name="variables">
+                    <list />
+                  </option>
+                </Turn>
+              </list>
+            </option>
+            <option name="updateTime" value="1744796415644" />
+          </Conversation>
+        </option>
+      </WebConversation>
+    </option>
+  </component>
+</project>
